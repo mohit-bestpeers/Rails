@@ -1,8 +1,10 @@
 
 
 <h1><%= @article.title %></h1>
-
 <p><%= @article.body %></p>
+<p><%= @article.status %></p>
+<p><%= @article.term %></p>
+<p><%= @article.email %></p>
 
 <ul>
   <li><%= link_to "Edit", edit_article_path(@article) %></li>

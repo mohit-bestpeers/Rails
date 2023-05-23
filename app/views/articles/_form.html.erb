@@ -21,6 +21,22 @@
   </div>
 
   <div>
+
+  <%=form.label :email %>
+  <%= text_field "article", :email %>
+  
+  </div>
+  
+
+  <div>
+    <%= form.label :term %><br>
+    <%= form.check_box  :term %><br>
+    <% article.errors.full_messages_for(:term).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  <div>
+  
+
     <%= form.submit %>
   </div>
 

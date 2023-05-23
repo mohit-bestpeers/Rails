@@ -1,14 +1,13 @@
 class ArticlesController < ApplicationController
-
-
-  http_basic_authenticate_with name: "Mohit", password: "12345", except: [:index, :show]
-
+  http_basic_authenticate_with name: 'Mohit', password: '12345', except: [:index, :show]
 
   def index
+    @name = 'Vinayak'
     @articles = Article.all
   end
   
   def show
+    puts @name
     @article = Article.find(params[:id])
   end
 
@@ -17,12 +16,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      redirect_to @article
-    else
-      render :new, status: :unprocessable_entity
+    valid = params[:term]
+    if valid = 1
+      @article = Article.new(article_params)
+      if @article.save
+        redirect_to @article
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
@@ -47,8 +48,11 @@ class ArticlesController < ApplicationController
     redirect_to root_path, status: :see_other
   end
 
+
+
   private
   def article_params
-    params.require(:article).permit(:title, :body,:status)
+    params.require(:article).permit(:title, :body,:status,:term,:email, :password_confirmation)
   end
+
 end
