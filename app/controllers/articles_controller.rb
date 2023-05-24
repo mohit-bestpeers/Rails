@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
   
+
   def show
     puts @name
     @article = Article.find(params[:id])
@@ -44,11 +45,8 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-
     redirect_to root_path, status: :see_other
   end
-
-
 
   private
   def article_params

@@ -1,0 +1,10 @@
+
+<ul>
+  <% @supplier.each do |article| %>
+ 
+      <li>
+        <%= link_to article.name, article %>
+      </li>
+ 
+  <% end %>
+</ul>
