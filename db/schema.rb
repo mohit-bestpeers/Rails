@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_070908) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_074522) do
   create_table "accounts", force: :cascade do |t|
     t.string "AccountNumber"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "appointements", force: :cascade do |t|
+    t.string "date"
+    t.integer "patient_id", null: false
+    t.integer "physician_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_appointements_on_patient_id"
+    t.index ["physician_id"], name: "index_appointements_on_physician_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -39,6 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_070908) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "physicians", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "last"
@@ -47,5 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_070908) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "appointements", "patients"
+  add_foreign_key "appointements", "physicians"
   add_foreign_key "comments", "articles"
 end
