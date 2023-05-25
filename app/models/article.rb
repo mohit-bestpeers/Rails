@@ -6,8 +6,8 @@ class Article < ApplicationRecord
   validates :body, length: { minimum: 10 }
   validates :term, acceptance:true
 
-  # before_validation :ensure_login_has_a_value
-  # after_validation :downcase_title , on: [ :create, :update ]
+   before_validation :ensure_login_has_a_value
+   after_validation :downcase_title , on: [ :create, :update ]
 
   private
 
