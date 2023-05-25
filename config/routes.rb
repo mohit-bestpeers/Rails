@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
-root "articles#index"
- 
-  resources :suppliers
-  resources :accounts
+  root "articles#index"
 
   resources :articles do
     resources :comments
-
-  
   end
 end
