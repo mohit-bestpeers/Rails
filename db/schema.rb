@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_074522) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_102642) do
+  create_table "accounthistories", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "transition"
+    t.index ["account_id"], name: "index_accounthistories_on_account_id"
+  end
+
   create_table "accounts", force: :cascade do |t|
     t.string "AccountNumber"
     t.integer "user_id", null: false
@@ -49,6 +57,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_074522) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "courses_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -68,6 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_074522) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounthistories", "accounts"
   add_foreign_key "accounts", "users"
   add_foreign_key "appointements", "patients"
   add_foreign_key "appointements", "physicians"
